@@ -58,15 +58,6 @@ ollama pull all-minilm:l6-v2
 ### 3. Setup the Project
 Create environment:
 ```bash
-#python -m venv venv
-#python -m venv venv
-
-# Windows:
-#venv\Scripts\activate
-
-# Mac/Linux:
-#source venv/bin/activate
-
 # Conda
 conda create -n medical-rag python=3.10
 conda activate medical-rag
