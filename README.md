@@ -58,13 +58,18 @@ ollama pull nomic-embed-text
 ### 3. Setup the Project
 Create environment:
 ```bash
-python -m venv venv
+python3.10 -m venv venv
+#python -m venv venv
 
 # Windows:
 venv\Scripts\activate
 
 # Mac/Linux:
 source venv/bin/activate
+
+# Conda
+conda create -n medical-rag python=3.10
+conda activate medical-rag
 ```
 
 Install dependencies:

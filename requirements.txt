@@ -1,6 +1,8 @@
+posthog==3.0.2
 langchain
 langchain-ollama
 langchain-community
+langchain-text-splitters
 langchain-core
 langchain-classic
 chromadb
