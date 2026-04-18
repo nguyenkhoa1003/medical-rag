@@ -30,7 +30,7 @@ The system follows a standard RAG pipeline:
 - **Orchestration**: LangChain  
 - **Local Inference**: Ollama  
 - **LLM**: BioMistral-7B (4-bit Quantized)  
-- **Embeddings**: Nomic-Embed-Text  
+- **Embeddings**: all-minilm:l6-v2 
 - **Vector Store**: ChromaDB  
 - **UI Framework**: Streamlit  
 
@@ -51,8 +51,8 @@ The system follows a standard RAG pipeline:
 Open your terminal and run:
 
 ```bash
-ollama pull cniongolo/biomistral
-ollama pull nomic-embed-text
+ollama pull hf.co/MaziyarPanahi/BioMistral-7B-GGUF:Q4_K_M
+ollama pull all-minilm:l6-v2
 ```
 
 ### 3. Setup the Project

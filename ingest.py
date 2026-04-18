@@ -14,8 +14,8 @@ def build_vector_db():
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
     chunks = text_splitter.split_documents(docs)
 
-    # 3. Initialize Embedding Model (Nomic-Embed is high-performing and local)
-    embeddings = OllamaEmbeddings(model="nomic-embed-text")
+    # 3. Initialize Embedding Model
+    embeddings = OllamaEmbeddings(model="all-minilm:l6-v2")
 
     # 4. Create and Persist Vector Database
     vector_db = Chroma.from_documents(

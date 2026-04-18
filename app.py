@@ -50,7 +50,7 @@ with st.sidebar:
     st.markdown("Your locally hosted AI medical assistant.")
     st.markdown("---")
     st.markdown("**Model:** MaziyarPanahi/BioMistral-7B-GGUF")
-    st.markdown("**Embeddings:** nomic-embed-text")
+    st.markdown("**Embeddings:** all-minilm:l6-v2")
     st.markdown("---")
     if st.button("Clear Conversation"):
         st.session_state.messages = []
@@ -63,7 +63,7 @@ st.markdown("Welcome to your intelligent, locally-hosted medical RAG system. Fee
 from langchain_ollama import OllamaLLM, OllamaEmbeddings
 try:
     llm = OllamaLLM(model="hf.co/MaziyarPanahi/BioMistral-7B-GGUF:Q4_K_M")
-    embeddings = OllamaEmbeddings(model="nomic-embed-text")
+    embeddings = OllamaEmbeddings(model="all-minilm:l6-v2")
 except Exception as e:
     st.error(f"Error loading models: {e}")
 
