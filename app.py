@@ -2,7 +2,7 @@ import os
 import streamlit as st
 from langchain_community.llms import Ollama
 from langchain_community.embeddings import OllamaEmbeddings
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_classic.chains import RetrievalQA
 
 st.set_page_config(page_title="MedLocal-RAG Assistant", page_icon="🩺", layout="wide")
@@ -103,7 +103,7 @@ if prompt := st.chat_input("Ask a medical question here..."):
         st.markdown(prompt)
 
     with st.chat_message("assistant", avatar="🧑‍⚕️"):
-        with st.spinner("Analyzing medical literature..."):
+        with st.spinner("Retrieving local context and generating answer..."):
             try:
                 response = qa_chain.invoke({"query": prompt})
                 answer = response["result"]
