@@ -1,7 +1,10 @@
 langchain
 langchain-ollama
 langchain-community
+langchain-core
+langchain-classic
 chromadb
 pypdf
+torchvision
 streamlit
 unstructured
