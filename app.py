@@ -49,7 +49,7 @@ with st.sidebar:
     st.title("🩺 MedLocal-RAG")
     st.markdown("Your locally hosted AI medical assistant.")
     st.markdown("---")
-    st.markdown("**Model:** cniongolo/biomistral")
+    st.markdown("**Model:** MaziyarPanahi/BioMistral-7B-GGUF")
     st.markdown("**Embeddings:** nomic-embed-text")
     st.markdown("---")
     if st.button("Clear Conversation"):
@@ -59,12 +59,10 @@ with st.sidebar:
 st.title("🩺 MedLocal-RAG Assistant")
 st.markdown("Welcome to your intelligent, locally-hosted medical RAG system. Feel free to ask any medical queries based on the ingested documents!")
 
-# Initialize Local Models (using langchain_ollama/langchain_community based on what user had before)
-# The user's code had:
 # from langchain_ollama import OllamaLLM, OllamaEmbeddings
 from langchain_ollama import OllamaLLM, OllamaEmbeddings
 try:
-    llm = OllamaLLM(model="cniongolo/biomistral")
+    llm = OllamaLLM(model="hf.co/MaziyarPanahi/BioMistral-7B-GGUF:Q4_K_M")
     embeddings = OllamaEmbeddings(model="nomic-embed-text")
 except Exception as e:
     st.error(f"Error loading models: {e}")
