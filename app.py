@@ -2,6 +2,7 @@ import os
 import streamlit as st
 from langchain_community.llms import Ollama
 from langchain_community.embeddings import OllamaEmbeddings
+from langchain_core.prompts import PromptTemplate
 from langchain_chroma import Chroma
 from langchain_classic.chains import RetrievalQA
 
@@ -59,10 +60,31 @@ with st.sidebar:
 st.title("🩺 MedLocal-RAG Assistant")
 st.markdown("Welcome to your intelligent, locally-hosted medical RAG system. Feel free to ask any medical queries based on the ingested documents!")
 
+template = """<s>[INST]
+You are a medical assistant. Use ONLY the following pieces of context to answer the question. 
+Rules:
+- Use ONLY the provided context
+- If unsure, say "I don't know"
+- Be concise and factual
+- Do NOT hallucinate
+Context: 
+{context}
+Question: 
+{question}
+[/INST]"""
+
+custom_prompt = PromptTemplate(template=template, input_variables=["context", "question"])
+
 # from langchain_ollama import OllamaLLM, OllamaEmbeddings
 from langchain_ollama import OllamaLLM, OllamaEmbeddings
 try:
-    llm = OllamaLLM(model="hf.co/MaziyarPanahi/BioMistral-7B-GGUF:Q4_K_M")
+    llm = OllamaLLM(
+        model="hf.co/MaziyarPanahi/BioMistral-7B-GGUF:Q4_K_M",
+        max_new_tokens= 256,
+        temperature = 0.1,
+        context_length = 4096,
+        threads = os.cpu_count()  # maximize CPU usage
+        )
     embeddings = OllamaEmbeddings(model="all-minilm:l6-v2")
 except Exception as e:
     st.error(f"Error loading models: {e}")
@@ -78,7 +100,8 @@ if os.path.exists("./vector_db"):
             llm=llm,
             chain_type="stuff",
             retriever=retriever,
-            return_source_documents=True
+            return_source_documents=True,
+            chain_type_kwargs={"prompt": custom_prompt}
         )
     except Exception as e:
         st.error(f"Error loading vector db: {e}")
@@ -86,6 +109,7 @@ if os.path.exists("./vector_db"):
 else:
     st.warning("⚠️ Vector database not found. Please run 'python ingest.py' first.")
     st.stop()
+
 
 # Chat Interface
 if "messages" not in st.session_state:
