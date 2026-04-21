@@ -18,7 +18,7 @@
 
 The system follows a standard RAG pipeline:
 
-1. **Ingestion**: Medical PDFs are chunked and converted into vectors using the `nomic-embed-text` model.  
+1. **Ingestion**: Medical PDFs are chunked and converted into vectors using the `all-minilm:l6-v2` model.  
 2. **Storage**: Vectors are stored in a local ChromaDB instance.  
 3. **Retrieval**: The system identifies the most relevant medical snippets for every user query.  
 4. **Generation**: BioMistral synthesizes the snippets into a coherent, professional response.  
